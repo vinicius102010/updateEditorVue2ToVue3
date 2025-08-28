@@ -1,0 +1,32 @@
+{
+  "name": "meus-dois-botoes",
+  "private": false,
+  "version": "1.0.0beta04",
+  "description": "Um Web Component de dois botões criado com Vue 3 e Vite.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "build-package": "vue-tsc --noEmit && vite build --config vite.config.lib.ts"
+  },
+  "dependencies": {
+    "vue": "^3.5.20"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vue-tsc": "^2.0.6"
+  },
+  "main": "./dist/my-two-buttons.umd.js",
+  "module": "./dist/my-two-buttons.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/my-two-buttons.es.js",
+      "require": "./dist/my-two-buttons.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ]
+}
