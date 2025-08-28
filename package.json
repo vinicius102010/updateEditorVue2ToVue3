@@ -14,7 +14,14 @@
     "@tiptap/pm": "^3.3.0",
     "@tiptap/starter-kit": "^3.3.0",
     "@tiptap/vue-3": "^3.3.0",
+    "@vueuse/core": "^13.8.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-vue-next": "^0.542.0",
+    "reka-ui": "^2.5.0",
+    "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.12",
+    "tw-animate-css": "^1.3.7",
     "vue": "^3.5.20"
   },
   "devDependencies": {
@@ -31,7 +38,7 @@
       "import": "./dist/my-two-buttons.es.js",
       "require": "./dist/my-two-buttons.umd.js"
     }
-  },
+  },"type": "module",
   "files": [
     "dist"
   ]

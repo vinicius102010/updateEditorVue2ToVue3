@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import MyTwoButtonsCe from "./components/MyTwoButtons.ce.vue";
+import Button from "./components/ui/button/Button.vue";
+import { Mic } from "lucide-vue-next";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./components/ui/tooltip";
+// import MyTwoButtonsCe from "./components/MyTwoButtons.ce.vue";
 </script>
 
 <template>
@@ -15,7 +24,18 @@ import MyTwoButtonsCe from "./components/MyTwoButtons.ce.vue";
 
     <div key="row" class="row q-col-gutter-sm justify-center q-my-md">
       <div key="col" class="col-12">
-        <MyTwoButtonsCe></MyTwoButtonsCe>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <Button size="icon">
+                <Mic></Mic>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p1>Entrada utilizando áudio</p1>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
     </div>
   </div>
