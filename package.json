@@ -1,8 +1,8 @@
 {
-  "name": "meus-dois-botoes",
+  "name": "editor",
   "private": false,
-  "version": "1.0.0beta04",
-  "description": "Um Web Component de dois botões criado com Vue 3 e Vite.",
+  "version": "1.0.0",
+  "description": "nova versao do editor",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -10,9 +10,15 @@
     "build-package": "vue-tsc --noEmit && vite build --config vite.config.lib.ts"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.12",
+    "@tiptap/pm": "^3.3.0",
+    "@tiptap/starter-kit": "^3.3.0",
+    "@tiptap/vue-3": "^3.3.0",
+    "tailwindcss": "^4.1.12",
     "vue": "^3.5.20"
   },
   "devDependencies": {
+    "@types/node": "^24.3.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
