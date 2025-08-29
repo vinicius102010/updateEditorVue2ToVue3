@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { Editor } from "@tiptap/vue-3";
 import Button from "./ui/button/Button.vue";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  TooltipProvider,
+} from "./ui/tooltip";
 import { SpeechToText } from "@/composables/voice";
 import { Mic } from "lucide-vue-next";
 import { onMounted, ref } from "vue";
@@ -49,9 +54,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <Tooltip>
-    <TooltipTrigger>Hover</TooltipTrigger>
-    <Button variant="outline" size="icon"> <Mic class="w-4 h-4"></Mic></Button>
-    <TooltipContent>Entrada utilizando áudio</TooltipContent>
-  </Tooltip>
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="outline" size="icon">
+          <Mic class="w-4 h-4"></Mic>
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>Entrada utilizando áudio</TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
 </template>

@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { Editor } from "@tiptap/vue-3"; // <-- Updated for Vue 3
+import { Editor } from "@tiptap/vue-3";
 import Voice from "./voice.vue";
 import { Save } from "lucide-vue-next";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  TooltipProvider,
+} from "./ui/tooltip";
+import Button from "./ui/button/Button.vue";
 
 // Define props with types and default values in a clean, type-safe way
 interface Props {
@@ -28,6 +35,20 @@ const getIcon = computed(() => {
 
 <template>
   <div v-if="editor" class="mb-0 shadow-md flex">
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            @click="$emit('save', console.log('fon'))">
+            <Save class="w-4 h-4"></Save>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>CTRL+S</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+
     <button
       ref="salvar"
       type="button"
@@ -39,5 +60,7 @@ const getIcon = computed(() => {
         CTRL+S
       </span>
     </button>
+
+    <voice v-if="enableVoiceRecognition" :editor="editor" />
   </div>
 </template>
