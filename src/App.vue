@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import Button from "./components/ui/button/Button.vue";
-import { Mic } from "lucide-vue-next";
+import voice from "./components/voice.vue";
+import { Editor } from "@tiptap/vue-3";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./components/ui/tooltip";
-// import MyTwoButtonsCe from "./components/MyTwoButtons.ce.vue";
+const props = defineProps<{
+  editor: Editor;
+}>();
 </script>
 
 <template>
@@ -21,22 +17,9 @@ import {
       </div>
       <div class="col-12"></div>
     </div>
-
+    <voice :editor="editor"></voice>
     <div key="row" class="row q-col-gutter-sm justify-center q-my-md">
-      <div key="col" class="col-12">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <Button size="icon">
-                <Mic></Mic>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p1>Entrada utilizando áudio</p1>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
+      <div key="col" class="col-12"></div>
     </div>
   </div>
 </template>

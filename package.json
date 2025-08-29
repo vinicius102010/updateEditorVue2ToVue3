@@ -26,9 +26,10 @@
   },
   "devDependencies": {
     "@types/node": "^24.3.0",
-    "@vitejs/plugin-vue": "^5.0.4",
+    "@vitejs/plugin-vue": "^6.0.1",
     "typescript": "^5.2.2",
-    "vite": "^5.2.0",
+    "vite": "^7.1.3",
+    "vite-plugin-vue-devtools": "^8.0.1",
     "vue-tsc": "^2.0.6"
   },
   "main": "./dist/my-two-buttons.umd.js",
@@ -38,7 +39,8 @@
       "import": "./dist/my-two-buttons.es.js",
       "require": "./dist/my-two-buttons.umd.js"
     }
-  },"type": "module",
+  },
+  "type": "module",
   "files": [
     "dist"
   ]
