@@ -2,16 +2,22 @@
 import { computed } from "vue";
 import { Editor } from "@tiptap/vue-3";
 import Voice from "./voice.vue";
-import { Save } from "lucide-vue-next";
+import { Save, Type, Baseline, Bold, Italic, Underline } from "lucide-vue-next";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
   TooltipProvider,
 } from "./ui/tooltip";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 import Button from "./ui/button/Button.vue";
+import DropdownMenuGroup from "./ui/dropdown-menu/DropdownMenuGroup.vue";
 
-// Define props with types and default values in a clean, type-safe way
 interface Props {
   editor: Editor;
   isDesktop?: boolean;
@@ -19,7 +25,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  isDesktop: true,
+  isDesktop: false,
   enableVoiceRecognition: true,
 });
 
@@ -35,32 +41,91 @@ const getIcon = computed(() => {
 
 <template>
   <div v-if="editor" class="mb-0 shadow-md flex">
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            @click="$emit('save', console.log('fon'))">
-            <Save class="w-4 h-4"></Save>
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>CTRL+S</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <div class="menubar is-hidden text-center col-12">
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="outline"
+              size="icon"
+              class="menubar_button"
+              @click="$emit('save')">
+              <Save class="w-4 h-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>CTRL+S</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
 
-    <button
-      ref="salvar"
-      type="button"
-      class="menubar__button group relative flex items-center rounded bg-transparent p-1 text-gray-600 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      @click="$emit('save')">
-      <Save class="h-5 w-5" />
-      <span
-        class="absolute bottom-full mb-2 hidden w-auto rounded-md bg-gray-800 p-2 text-xs text-white group-hover:block">
-        CTRL+S
-      </span>
-    </button>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="outline"
+              class="menubar_button"
+              size="icon"
+              @click="editor.chain().focus().toggleHeading({ level: 2 }).run()">
+              <Type class="w-4 h-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>Título</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+      <!--#region MOBILE -->
+      <template v-if="!isDesktop">
+        <TooltipProvider :delay-duration="100">
+          <Tooltip>
+            <DropdownMenu>
+              <TooltipTrigger as-child>
+                <DropdownMenuTrigger as-child>
+                  <Button variant="ghost" size="icon" class="font-bold">
+                    <Baseline class="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+              </TooltipTrigger>
+              <TooltipContent> Formatar </TooltipContent>
+              <DropdownMenuContent class="w-56" align="start">
+                <DropdownMenuGroup>
+                  <DropdownMenuItem
+                    @click="editor.chain().focus().toggleBold().run()"
+                    :class="{ 'bg-accent': editor.isActive('bold') }">
+                    <Bold class="mr-2 h-4 w-4" />
+                    <span>Negrito</span>
+                  </DropdownMenuItem>
 
-    <voice v-if="enableVoiceRecognition" :editor="editor" />
+                  <DropdownMenuItem
+                    @click="editor.chain().focus().toggleItalic().run()"
+                    :class="{ 'bg-accent': editor.isActive('italic') }">
+                    <Italic class="mr-2 h-4 w-4" />
+                    <span>Itálico</span>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem
+                    @click="editor.chain().focus().toggleUnderline().run()"
+                    :class="{ 'bg-accent': editor.isActive('underline') }">
+                    <Underline class="mr-2 h-4 w-4" />
+                    <span>Sublinhado</span>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </Tooltip>
+        </TooltipProvider>
+      </template>
+      <!--#endregion -->
+      <voice v-if="enableVoiceRecognition" :editor="editor" />
+    </div>
   </div>
 </template>
+
+<style>
+.menubar__button {
+  display: inline-flex;
+  background: transparent;
+  border: 0;
+  padding: 0.2rem 0.3rem;
+  margin-right: 0.1rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+</style>

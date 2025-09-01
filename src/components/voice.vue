@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
   TooltipProvider,
 } from "./ui/tooltip";
-import { SpeechToText } from "@/composables/voice";
+import { SpeechToText } from "../composables/voice";
 import { Mic } from "lucide-vue-next";
 import { onMounted, ref } from "vue";
 
@@ -57,8 +57,10 @@ onMounted(() => {
   <TooltipProvider>
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Mic class="w-4 h-4"></Mic>
+        <Button variant="outline" size="icon" @click="start()">
+          <Mic
+            class="w-4 h-4"
+            :style="{ color: recognizing ? 'red' : 'currentColor' }" />
         </Button>
       </TooltipTrigger>
       <TooltipContent>Entrada utilizando áudio</TooltipContent>
