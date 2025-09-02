@@ -46,7 +46,7 @@ const getIcon = computed(() => {
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              variant="outline"
+              variant="default"
               size="icon"
               class="menubar_button"
               @click="$emit('save')">

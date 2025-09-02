@@ -43,6 +43,10 @@ onMounted(() => {
   <div id="app" class="container">
     <div v-if="editor">
       <Menu :editor="editor"></Menu>
+      <div style="margin-top: 200px">
+        <h2>Conteúdo do Editor:</h2>
+        <pre>{{ editor.getHTML() }}</pre>
+      </div>
       <editor-content :editor="editor" />
     </div>
   </div>
